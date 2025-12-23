@@ -70,5 +70,21 @@ This dashboard recreates a simplified version of such a system by combining a Py
 - `POST /services` — add a new monitored service
 - `POST /services/check` — run health checks for all services
 
+---
+
+## Screenshots
+
+### Dashboard Overview
+![Dashboard](screenshots/dashboard-overview.png)
+
+### Add Service
+![Add Service](screenshots/add-service1.png)
+![Add Service](screenshots/add-service2.png)
+
+### Error Handling (DOWN state)
+![Down State](screenshots/down-state-error.png)
+
+### Backend API Documentation
+![Swagger Docs](screenshots/swagger-docs.png)
 
 
