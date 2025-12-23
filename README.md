@@ -1,71 +1,74 @@
-# Network Operations Dashboard (Mini OSS Tool)
+# Network Operations Dashboard (Real API Health Monitor)
 
-A full-stack Network Operations Dashboard that simulates a lightweight OSS (Operations Support System).
-The application allows users to monitor network services, manage service states, and interact with backend microservices through a modern web interface.
+A full-stack **Network Operations Dashboard** that performs real HTTP health checks against monitored services and visualizes their operational status in a modern web interface.
 
-This project was built to demonstrate real-world software engineering practices used in network operations, cloud platforms, and DevOps-driven environments.
+This project simulates a lightweight **OSS (Operations Support System)** used by network and platform operations teams to monitor service availability, latency, and failures.
 
 ---
 
 ## Project Overview
 
-Network Operations teams rely on OSS tools to monitor services, detect issues, and manage infrastructure state.
-This project recreates a simplified version of such a system by combining:
+In production environments, operations teams need to quickly answer questions such as:
 
-- A Python-based backend microservice
-- A React + TypeScript frontend dashboard
-- API-driven communication between components
+- Is a service reachable right now?
+- Is it slow (degraded) or fully down?
+- What HTTP status or error occurred?
 
-The goal is to showcase full-stack development, system integration, and production-oriented design.
+This dashboard recreates a simplified version of such a system by combining a Python-based backend microservice with a React-based frontend dashboard.
 
 ---
 
 ## Features
 
-- View a list of network services and their operational status
-- Add new services dynamically through the UI
-- Toggle service status (Active / Inactive)
-- Backend REST API built with FastAPI
-- Frontend dashboard built with Next.js and TypeScript
-- Clean separation between frontend and backend
-- API documentation via FastAPI Swagger UI
-- Scalable structure suitable for cloud deployment and CI/CD
+- Perform real HTTP health checks against public endpoints
+- Classify service status as **UP**, **DEGRADED**, or **DOWN**
+- Display latency, HTTP status code, last checked time, and error messages
+- Add new monitored services dynamically from the UI
+- Backend REST API with interactive Swagger documentation
+- Clear separation between frontend and backend (microservice-style architecture)
+
+---
+
+## Status Classification Logic
+
+- **UP**: HTTP status 200–399 and latency < 800ms  
+- **DEGRADED**: HTTP status 200–399 and latency ≥ 800ms  
+- **DOWN**: Request timeout, connection error, or HTTP status ≥ 400  
+
+(Thresholds can be adjusted in the backend.)
 
 ---
 
 ## System Architecture
 
-The system follows a microservice-inspired architecture:
 
-- **Frontend** communicates with backend services via REST APIs
-- **Backend** handles business logic and data validation
-- **API layer** acts as the contract between systems
-
-This mirrors how real OSS/BSS and cloud platforms are designed in production.
+- The **frontend** provides the user interface and triggers health checks
+- The **backend** acts as a microservice that performs HTTP requests and returns structured results
+- Communication occurs via RESTful APIs using JSON
 
 ---
 
 ## Tech Stack
 
 ### Frontend
-- Next.js (React framework)
+- Next.js (React)
 - TypeScript
-- TailwindCSS
-- REST API integration using fetch
+- Tailwind CSS
 
 ### Backend
 - Python
 - FastAPI
-- Uvicorn ASGI server
-- Pydantic for data modeling and validation
-
-### Development Practices
-- RESTful API design
-- Modular project structure
-- Environment-based configuration
-- Git and GitHub for version control
+- Uvicorn
+- httpx (HTTP client for health checks)
 
 ---
 
-## 📁 Project Structure
+## API Endpoints
+
+- `GET /health` — backend health check
+- `GET /services` — retrieve monitored services
+- `POST /services` — add a new monitored service
+- `POST /services/check` — run health checks for all services
+
+
 
