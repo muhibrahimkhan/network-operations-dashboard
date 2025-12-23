@@ -78,7 +78,7 @@ This dashboard recreates a simplified version of such a system by combining a Py
 ![Dashboard](screenshots/dashboard-overview.png)
 
 ### Add Service
-![Add Service](screenshots/add-service1.png)
+![Add Service](screenshots/add-serice1.png)
 ![Add Service](screenshots/add-service2.png)
 
 ### Error Handling (DOWN state)
